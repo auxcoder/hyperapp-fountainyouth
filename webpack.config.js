@@ -18,7 +18,7 @@ const plugins = [
 
 module.exports = () => ({
   mode: 'development',
-  entry: ['./src/index.js', './styles/app.css'],
+  entry: ['./src/index.js', './styles/app.scss'],
   devtool: 'source-map',
   output: {
     filename: '[name].[hash].js',
@@ -30,6 +30,14 @@ module.exports = () => ({
         test: /\.js$/,
         loader: 'babel-loader',
         include: [path.resolve(__dirname, './')],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'sass-loader', // compiles Sass to CSS, using Node Sass by default
+        ],
       },
       {
         test: /\.css$/,
