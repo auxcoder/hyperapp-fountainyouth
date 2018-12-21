@@ -1,5 +1,5 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const webpack = require('webpack');
@@ -12,18 +12,13 @@ const plugins = [
   new ScriptExtHtmlWebpackPlugin({
     defaultAttribute: 'defer',
   }),
-  new ExtractTextPlugin({
-    filename: './[name].[hash].css',
-    allChunks: true,
-  }),
+  new MiniCssExtractPlugin(),
   new webpack.optimize.ModuleConcatenationPlugin(),
 ];
 
 module.exports = () => ({
-  entry: [
-    './src/index.js',
-    './styles/app.css',
-  ],
+  mode: 'development',
+  entry: ['./src/index.js', './styles/app.css'],
   devtool: 'source-map',
   output: {
     filename: '[name].[hash].js',
@@ -34,15 +29,16 @@ module.exports = () => ({
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [
-          path.resolve(__dirname, './'),
-        ],
+        include: [path.resolve(__dirname, './')],
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: 'css-loader?importLoaders=1',
-        }),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader',
+        ],
       },
     ],
   },
