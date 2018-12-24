@@ -1,0 +1,11 @@
+@mixin icon($width, $heigh) {
+  display: inline-block;
+  line-height: 1px;
+  text-align: center;
+  vertical-align: top;
+  width: $width;
+  height: $heigh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
