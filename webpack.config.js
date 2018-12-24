@@ -6,7 +6,7 @@ const webpack = require('webpack');
 
 const plugins = [
   new HtmlWebpackPlugin({
-    title: 'Hyperapp One',
+    title: 'Fountain Of Youth',
     template: './src/index.html',
   }),
   new ScriptExtHtmlWebpackPlugin({
@@ -38,6 +38,10 @@ module.exports = () => ({
           'css-loader', // translates CSS into CommonJS
           'sass-loader', // compiles Sass to CSS, using Node Sass by default
         ],
+      },
+      {
+        test: /\.(ttf|eot|svg|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader',
       },
       {
         test: /\.css$/,

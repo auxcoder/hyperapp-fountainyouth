@@ -10,9 +10,9 @@ const OUTPUT_DIR = './build';
 
 const plugins = [
   new HtmlWebpackPlugin({
-    title: 'Hyperapp One',
+    title: 'Fountain Of Youth',
     template: './src/index.html',
-    filename: path.join(__dirname, './index.html'),
+    filename: path.join(__dirname, OUTPUT_DIR, './index.html'),
   }),
   new ScriptExtHtmlWebpackPlugin({
     defaultAttribute: 'defer',
@@ -27,7 +27,7 @@ const plugins = [
 ];
 
 module.exports = () => ({
-  entry: ['./src/index.js', './styles/app.css'],
+  entry: ['./src/index.js', './styles/app.scss'],
   output: {
     filename: '[name].[hash].js',
     path: path.resolve(__dirname, OUTPUT_DIR),
@@ -38,6 +38,18 @@ module.exports = () => ({
         test: /\.js$/,
         loader: 'babel-loader',
         include: [path.resolve(__dirname, './')],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'sass-loader', // compiles Sass to CSS, using Node Sass by default
+        ],
+      },
+      {
+        test: /\.(ttf|eot|svg|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader',
       },
       {
         test: /\.css$/,

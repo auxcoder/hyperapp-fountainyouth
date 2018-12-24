@@ -1,0 +1,15 @@
+user:
+# optional, prompted if none given
+password:
+host:
+port: 21
+client:
+  localRoot: /build
+  remoteRoot: /public_html/fountainyouth4u
+  # this would upload everything except dot files
+  include: ['*', '.*', '**/*']
+  # e.g. exclude sourcemaps
+  exclude:
+    - 'build/**/*.map'
+  # delete existing files at destination before uploading
+  deleteRoot: true
