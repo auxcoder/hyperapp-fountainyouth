@@ -10,9 +10,9 @@ const OUTPUT_DIR = './build';
 
 const plugins = [
   new HtmlWebpackPlugin({
-    title: 'Hyperapp One',
+    title: 'Fountain Of Youth',
     template: './src/index.html',
-    filename: path.join(__dirname, './index.html'),
+    filename: path.join(__dirname, OUTPUT_DIR, './index.html'),
   }),
   new ScriptExtHtmlWebpackPlugin({
     defaultAttribute: 'defer',
