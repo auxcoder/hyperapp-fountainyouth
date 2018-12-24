@@ -1,7 +1,7 @@
-user:
+user: kiubmenc
 # optional, prompted if none given
-password:
-host:
+password: Qv0l44c3r3qv0l4!
+host: ftp.kiubmen.com
 port: 21
 client:
   localRoot: /build
