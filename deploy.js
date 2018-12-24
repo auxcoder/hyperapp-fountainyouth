@@ -1,24 +1,13 @@
 const path = require('path');
-const FtpDeploy = require('ftp-deploy');
-const yaml = require('js-yaml');
+const FtpDeploy = require('ftp-deploy'); // eslint-disable-line
+const yaml = require('js-yaml'); // eslint-disable-line
 const fs = require('fs');
 
 const ftpDeploy = new FtpDeploy();
 
-const args = process.argv; // args = [node, file, [arg1, arg2]]
-
-if (args[2] !== 'client' && args[2] !== 'api') {
-  console.log(`The deploy task require the target argument: client or api. Current equal:${args[2]}`);
-  console.log('like: npm run deploy api');
-
-  return false;
-}
-
 let config;
 try {
   config = yaml.safeLoad(fs.readFileSync('ftp-config.yml', 'utf8'));
-  // const indentedJson = JSON.stringify(config, null, 4);
-  // console.log(indentedJson);
 } catch (e) {
   console.log(e);
 }
@@ -35,23 +24,9 @@ const configClient = {
   deleteRoot: config.client.deleteRoot,
 };
 
-const configAPi = {
-  user: config.user,
-  password: config.password,
-  host: config.host,
-  port: config.port,
-  localRoot: path.join(__dirname, config.api.localRoot),
-  remoteRoot: config.api.remoteRoot,
-  include: config.api.include,
-  exclude: config.api.exclude,
-  deleteRoot: config.api.deleteRoot,
-};
-
-const targetConfig = args[2] === 'client' ? configClient : configAPi;
-
 // use with promises
 ftpDeploy
-  .deploy(targetConfig)
+  .deploy(configClient)
   .then(res => console.log('finished', res))
   .catch(err => console.log(err));
 
